@@ -221,6 +221,9 @@ Use `has()` to check field presence. To check whether a map contains a key, use 
 operator instead. For example,
 `has(object.metadata.labels) && 'example.com/environment' in object.metadata.labels` checks that
 the `metadata.labels` field is present and that the map contains the `example.com/environment` key.
+For multi-level optional field access, prefer CEL optional syntax (Kubernetes 1.29+):
+`object.?metadata.labels['example.com/block'].orValue('')` safely traverses absent intermediate
+fields and returns the given default value.
 
 #### Per-namespace Parameters
 
@@ -580,11 +583,11 @@ it is defined on disk rather than through the API.
 
 The list of exempt API kinds is:
 
-* [ValidatingAdmissionPolicies]({{< relref "/docs/reference/kubernetes-api/policy-resources/validating-admission-policy-v1/" >}})
-* [ValidatingAdmissionPolicyBindings]({{< relref "/docs/reference/kubernetes-api/policy-resources/validating-admission-policy-binding-v1/" >}})
+* [ValidatingAdmissionPolicies]({{< relref "/docs/reference/kubernetes-api/admissionregistration/validating-admission-policy-v1/" >}})
+* [ValidatingAdmissionPolicyBindings]({{< relref "/docs/reference/kubernetes-api/admissionregistration/validating-admission-policy-binding-v1/" >}})
 * MutatingAdmissionPolicies
 * MutatingAdmissionPolicyBindings
-* [TokenReviews]({{< relref "/docs/reference/kubernetes-api/authentication-resources/token-review-v1/" >}})
-* [LocalSubjectAccessReviews]({{< relref "/docs/reference/kubernetes-api/authorization-resources/local-subject-access-review-v1/" >}})
-* [SelfSubjectAccessReviews]({{< relref "/docs/reference/kubernetes-api/authorization-resources/self-subject-access-review-v1/" >}})
-* [SelfSubjectReviews]({{< relref "/docs/reference/kubernetes-api/authentication-resources/self-subject-review-v1/" >}})
+* [TokenReviews]({{< relref "/docs/reference/kubernetes-api/definitions/token-review-v1-authentication/" >}})
+* [LocalSubjectAccessReviews]({{< relref "/docs/reference/kubernetes-api/definitions/local-subject-access-review-v1-authorization/" >}})
+* [SelfSubjectAccessReviews]({{< relref "/docs/reference/kubernetes-api/definitions/self-subject-access-review-v1-authorization/" >}})
+* [SelfSubjectReviews]({{< relref "/docs/reference/kubernetes-api/definitions/self-subject-review-v1-authentication/" >}})

@@ -356,6 +356,9 @@ A Deployment's label selector is **immutable** after creation;
 it cannot be updated via `kubectl patch`, `kubectl edit`, `kubectl apply`, or tools like `helm upgrade`.
 
 If you must change the selector, you have to delete the Deployment and recreate it.
+By default, deleting the Deployment also deletes its running Pods, causing downtime; use
+`--cascade=orphan` if you need those Pods to keep running while you recreate the Deployment
+(see the implications below).
 Exercise great caution and ensure you grasp the following implications:
 
 * **Additions:** When you create a new Deployment with a narrower selector, the new Deployment **must** also have a suitable Pod template.
@@ -1367,7 +1370,7 @@ it is created.
 
 * Learn more about [Pods](/docs/concepts/workloads/pods).
 * [Run a stateless application using a Deployment](/docs/tasks/run-application/run-stateless-application-deployment/).
-* Read the {{< api-reference page="workload-resources/deployment-v1" >}} to understand the Deployment API.
+* Read the {{< api-reference page="apps/deployment-v1" >}} to understand the Deployment API.
 * Read about [PodDisruptionBudget](/docs/concepts/workloads/pods/disruptions/) and how
   you can use it to manage application availability during disruptions.
 * Use kubectl to [create a Deployment](/docs/tutorials/kubernetes-basics/deploy-app/deploy-intro/).
